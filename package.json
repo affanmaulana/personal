@@ -1,0 +1,29 @@
+{
+  "name": "affan-maulana-personal",
+  "version": "1.0.0",
+  "description": "Affan Maulana - Experience Designer Portfolio",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/affanmaulana/personal.git"
+  },
+  "keywords": [
+    "portfolio",
+    "design",
+    "urban-design",
+    "digital-systems"
+  ],
+  "author": "Affan Maulana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/affanmaulana/personal/issues"
+  },
+  "homepage": "https://github.com/affanmaulana/personal#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
