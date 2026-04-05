@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affan Maulana - Experience Designer</title>
+    
+    <link rel="icon" type="image/svg+xml" href="root/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Plus+Jakarta+Sans:ital,wght@0,500;0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* 1. Reset & Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100vh; /* Fallback */
+            height: 100dvh; /* Mobile browser address bar fix */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAFAFA;
+            color: #0F172A;
+            overflow: hidden;
+        }
+
+        /* Variabel dinamis untuk melacak kursor */
+        :root {
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        /* 2. Layout Utama */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 3. Lapis Latar Belakang - Base (Redup) */
+        .pattern-bg-base {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjU1IiB2aWV3Qm94PSItMTAgMCAxNTAgNTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik02NC43ODg0IDBDNzMuODQyIDAuMTY2MDE4IDc4LjU2NTEgNi4yNDQ3OSA3OC42MDA5IDYuMjkxMDJMMTE4LjM4NCA0OS44MjAzQzExOC4zOTIgNDkuODI5IDExOS43MjIgNTEuMzUwNSAxMTYuNTk3IDUyLjc1NTlDMTE0Ljk2OSA1My40ODggMTExLjkyOSA1NC45MTE4IDEwNy40MzEgNTQuNzc2NEM5OS4zMTkzIDU0LjUzMiA5NC4yMDkzIDQ4Ljk0MDQgOTQuMjA5MyA0OC45NDA0TDU0LjE5NzYgNS4xNjExM0M1NC4xOTAxIDUuMTUzNCA1Mi43MTczIDMuNjI3NSA1NS42OTk1IDIuMTA0NDlDNTcuMjQ4MiAxLjMxMzU4IDU5LjkxNjMgMC4wNTg0Mzc2IDY0Ljc4ODQgMFpNMTM0LjYgMTMuNTc2MkMxMzQuNiAxMy41NzYyIDEzNS41NTggMTIuNzE5MyAxMzYuNjI5IDEzLjUwMkMxMzcuMjQzIDEzLjk1MDYgMTM3Ljg5MSAxNS4yMTU2IDEzOC41IDE2Ljk5NjFDMTM5LjA3OCAxOC42ODIzIDEzOS43MzMgMjAuODYyOSAxMzkuNjIgMjMuNTg0QzEzOS4yMjcgMzMuMDg3OSAxMzMuNzMgMzcuNTE1OCAxMzMuNzA0IDM3LjUzNjFMMTIzLjc0NCA0Ni42Mzg3TDExMi4yMiAzNC4wMjkzTDEzNC42IDEzLjU3NjJaIiBmaWxsPSIjREJERUU1Ii8+CjxwYXRoIGQ9Ik03NC44NDQ5IDU0Ljc4NTVDNjUuNzk4NCA1NC42MTk2IDYxLjA3NTUgNDguNTUgNjEuMDMyNCA0OC40OTQ1TDIxLjI0OTIgNC45NjUyMUMyMS4yNDkyIDQuOTY1MjEgMTkuOTAyMyAzLjQzOTA0IDIzLjAzNjQgMi4wMjk2NkMyNC42NjQ0IDEuMjk3NTcgMjcuNzA0OCAtMC4xMjYzMDggMzIuMjAyNCAwLjAwOTE1NTI3QzQwLjMxNCAwLjI1MzU0NyA0NS40MjQgNS44NDUwOSA0NS40MjQgNS44NDUwOUw4NS40MzU4IDQ5LjYyNDRDODUuNDUxNyA0OS42NDEgODYuOTA3MyA1MS4xNjI1IDgzLjkzMzggNTIuNjgxQzgyLjM4NTEgNTMuNDcxOSA3OS43MTcxIDU0LjcyNzEgNzQuODQ0OSA1NC43ODU1Wk01LjAzMzQyIDQxLjIwOTRDNS4wMjk4MiA0MS4yMTI2IDQuMDczMjIgNDIuMDY0OSAzLjAwNDEyIDQxLjI4MzZDMi4zOTAyOCA0MC44MzQ5IDEuNzQyNjUgMzkuNTcgMS4xMzMwMyAzNy43ODk0QzAuNTU1NzA5IDM2LjEwMzIgLTAuMDk5NzMxMiAzMy45MjI3IDAuMDEyOTEzOCAzMS4yMDE1QzAuNDA2MzMgMjEuNzAwNCA1LjkwMDMxIDE3LjI3MjQgNS45Mjg5MyAxNy4yNDk0TDE1Ljg4OTkgOC4xNDY4NUwyNy40MTMzIDIwLjc1NjJMNS4wMzM0MiA0MS4yMDk0WiIgZmlsbD0iI0RCREVFNSIvPgo8L3N2Zz4K');
+            background-repeat: repeat;
+            background-size: 150px 70px; 
+            opacity: 0.1;
+        }
+
+        /* 4. Lapis Latar Belakang - Highlight (Spotlight Kursor) */
+        .pattern-bg-highlight {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjU1IiB2aWV3Qm94PSItMTAgMCAxNTAgNTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik02NC43ODg0IDBDNzMuODQyIDAuMTY2MDE4IDc4LjU2NTEgNi4yNDQ3OSA3OC42MDA5IDYuMjkxMDJMMTE4LjM4NCA0OS44MjAzQzExOC4zOTIgNDkuODI5IDExOS43MjIgNTEuMzUwNSAxMTYuNTk3IDUyLjc1NTlDMTE0Ljk2OSA1My40ODggMTExLjkyOSA1NC45MTE4IDEwNy40MzEgNTQuNzc2NEM5OS4zMTkzIDU0LjUzMiA5NC4yMDkzIDQ4Ljk0MDQgOTQuMjA5MyA0OC45NDA0TDU0LjE5NzYgNS4xNjExM0M1NC4xOTAxIDUuMTUzNCA1Mi43MTczIDMuNjI3NSA1NS42OTk1IDIuMTA0NDlDNTcuMjQ4MiAxLjMxMzU4IDU5LjkxNjMgMC4wNTg0Mzc2IDY0Ljc4ODQgMFpNMTM0LjYgMTMuNTc2MkMxMzQuNiAxMy41NzYyIDEzNS41NTggMTIuNzE5MyAxMzYuNjI5IDEzLjUwMkMxMzcuMjQzIDEzLjk1MDYgMTM3Ljg5MSAxNS4yMTU2IDEzOC41IDE2Ljk5NjFDMTM5LjA3OCAxOC42ODIzIDEzOS43MzMgMjAuODYyOSAxMzkuNjIgMjMuNTg0QzEzOS4yMjcgMzMuMDg3OSAxMzMuNzMgMzcuNTE1OCAxMzMuNzA0IDM3LjUzNjFMMTIzLjc0NCA0Ni42Mzg3TDExMi4yMiAzNC4wMjkzTDEzNC42IDEzLjU3NjJaIiBmaWxsPSIjREJERUU1Ii8+CjxwYXRoIGQ9Ik03NC44NDQ5IDU0Ljc4NTVDNjUuNzk4NCA1NC42MTk2IDYxLjA3NTUgNDguNTUgNjEuMDMyNCA0OC40OTQ1TDIxLjI0OTIgNC45NjUyMUMyMS4yNDkyIDQuOTY1MjEgMTkuOTAyMyAzLjQzOTA0IDIzLjAzNjQgMi4wMjk2NkMyNC42NjQ0IDEuMjk3NTcgMjcuNzA0OCAtMC4xMjYzMDggMzIuMjAyNCAwLjAwOTE1NTI3QzQwLjMxNCAwLjI1MzU0NyA0NS40MjQgNS44NDUwOSA0NS40MjQgNS44NDUwOUw4NS40MzU4IDQ5LjYyNDRDODUuNDUxNyA0OS42NDEgODYuOTA3MyA1MS4xNjI1IDgzLjkzMzggNTIuNjgxQzgyLjM4NTEgNTMuNDcxOSA3OS43MTcxIDU0LjcyNzEgNzQuODQ0OSA1NC43ODU1Wk01LjAzMzQyIDQxLjIwOTRDNS4wMjk4MiA0MS4yMTI2IDQuMDczMjIgNDIuMDY0OSAzLjAwNDEyIDQxLjI4MzZDMi4zOTAyOCA0MC44MzQ5IDEuNzQyNjUgMzkuNTcgMS4xMzMwMyAzNy43ODk0QzAuNTU1NzA5IDM2LjEwMzIgLTAuMDk5NzMxMiAzMy45MjI3IDAuMDEyOTEzOCAzMS4yMDE1QzAuNDA2MzMgMjEuNzAwNCA1LjkwMDMxIDE3LjI3MjQgNS45Mjg5MyAxNy4yNDk0TDE1Ljg4OTkgOC4xNDY4NUwyNy40MTMzIDIwLjc1NjJMNS4wMzM0MiA0MS4yMDk0WiIgZmlsbD0iI0RCREVFNSIvPgo8L3N2Zz4K');
+            background-repeat: repeat;
+            background-size: 150px 70px;
+            opacity: 0.2;
+            filter: contrast(1.2) brightness(0.9);
+            -webkit-mask-image: radial-gradient(circle 120px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 120px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* 5. Elemen Tipografi */
+        .top-brand {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: 700;
+            z-index: 3;
+            letter-spacing: -0.5px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 24px;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 500;
+            line-height: 1.3;
+            letter-spacing: -1px;
+            pointer-events: auto;
+        }
+
+        .highlight {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .text-blue { color: #4F46E5; }
+        .text-pink { color: #E11D48; }
+
+        /* Animasi Masuk */
+        .animate-in {
+            animation: slideUpFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 6. CTA / Social Links */
+        .social-links {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 24px;
+            z-index: 3;
+            pointer-events: auto;
+            white-space: nowrap;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: #64748B;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .social-links a:hover {
+            color: #0F172A;
+        }
+        
+        /* Animasi khusus untuk elemen di tengah absolut */
+        .animate-in-centered {
+            animation: slideUpFadeCentered 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        @keyframes slideUpFadeCentered {
+            from { opacity: 0; transform: translate(-50%, 15px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        /* ------------------------------------
+           RESPONSIVE MEDIA QUERIES 
+           ------------------------------------ */
+        
+        /* Tablet & Mobile Landscape */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: clamp(32px, 6vw, 48px);
+            }
+        }
+
+        /* Mobile Portrait */
+        @media (max-width: 768px) {
+            .top-brand {
+                top: 24px; /* Naikkan sedikit agar tidak memakan ruang */
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 0 20px;
+            }
+
+            h1 {
+                font-size: clamp(26px, 7vw, 36px);
+                line-height: 1.35;
+            }
+
+            .social-links {
+                bottom: 32px;
+                width: 90%; /* Memberikan batas layar */
+                flex-wrap: wrap; /* Izinkan tombol turun ke baris baru jika kepenuhan */
+                justify-content: center;
+                gap: 16px 20px; /* Jarak atas-bawah 16px, kiri-kanan 20px */
+            }
+
+            .social-links a {
+                font-size: 13px; /* Sedikit dikecilkan untuk mencegah wrap yang berlebihan */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero" id="hero-section">
+        <div class="pattern-bg-base"></div>
+        <div class="pattern-bg-highlight"></div>
+        
+        <div class="top-brand">Affan Maulana</div>
+        
+        <div class="content animate-in">
+            <h1>
+                Designing Scalable Environments<br>
+                where <span class="highlight text-blue">Urban Design</span> meets<br>
+                <span class="highlight text-pink">Digital Systems</span>.
+            </h1>
+        </div>
+        
+        <div class="social-links animate-in-centered" style="animation-delay: 0.3s;">
+            <a href="mailto:affanmaulanayasin@gmail.com" target="_blank">Email</a>
+            <a href="https://linkedin.com/in/affanmaulana" target="_blank">LinkedIn</a>
+            <a href="https://issuu.com/affanmy/docs/portolio_affan_maulana_2024/" target="_blank">Issuu</a>
+            <a href="https://www.behance.net/affanm#" target="_blank">Behance</a>
+            <a href="https://www.figma.com/@fvnscreen/" target="_blank">Figma</a>
+        </div>
+        
+    </section>
+
+    <script>
+        // Track mouse untuk desktop
+        document.addEventListener('mousemove', (e) => {
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+
+        // Track touch untuk mobile (opsional agar spotlight mengikuti jari saat disentuh)
+        document.addEventListener('touchmove', (e) => {
+            document.documentElement.style.setProperty('--mouse-x', `${e.touches[0].clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.touches[0].clientY}px`);
+        });
+    </script>
+</body>
+</html>
