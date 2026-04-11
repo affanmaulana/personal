@@ -46,6 +46,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
         }
 
         /* 3. Lapis Latar Belakang - Base (Redup) */
@@ -76,10 +77,9 @@
 
         /* 5. Elemen Tipografi */
         .top-brand {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 40px;
+            width: 100%;
+            text-align: center;
             font-size: 16px;
             font-weight: 700;
             z-index: 3;
@@ -93,6 +93,8 @@
             max-width: 1200px;
             padding: 0 24px;
             pointer-events: none;
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
         h1 {
@@ -136,10 +138,6 @@
 
         /* 6. CTA / Social Links */
         .social-links {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
             gap: 24px;
             z-index: 3;
@@ -160,6 +158,90 @@
             color: #0F172A;
         }
 
+        .duo-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+            margin-bottom: 16px;
+            pointer-events: auto;
+        }
+
+        .duo-widget {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 10px 12px 10px 10px;
+            border-radius: 100px;
+            border: 1px solid #ffffff;
+            box-shadow:
+                0 4px 15px rgba(255, 150, 0, 0.05),
+                0 1px 2px rgba(255, 150, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .duo-widget:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 150, 0, 0.12);
+            border-color: rgba(255, 150, 0, 0.4);
+        }
+
+        .duo-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(255, 100, 0, 0.3));
+            animation: flame-pulse 2s infinite ease-in-out;
+        }
+
+        .duo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes flame-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 2px 4px rgba(255, 100, 0, 0.3));
+            }
+
+            50% {
+                transform: scale(1.15);
+                filter: drop-shadow(0 3px 8px rgba(255, 60, 0, 0.5));
+            }
+        }
+
+        .duo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            align-items: flex-start;
+        }
+
+        .duo-main {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000000;
+            line-height: 1.1;
+            letter-spacing: -0.2px;
+        }
+
+        .duo-sub {
+            font-size: 10px;
+            font-weight: 500;
+            color: #64748B;
+            letter-spacing: 0.08em;
+            margin-top: 1px;
+        }
+
         /* Animasi khusus untuk elemen di tengah absolut */
         .animate-in-centered {
             animation: slideUpFadeCentered 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -168,13 +250,106 @@
         @keyframes slideUpFadeCentered {
             from {
                 opacity: 0;
-                transform: translate(-50%, 15px);
+                transform: translateY(15px);
             }
 
             to {
                 opacity: 1;
-                transform: translate(-50%, 0);
+                transform: translateY(0);
             }
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            z-index: 3;
+            pointer-events: auto;
+        }
+
+        .project-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1E293B;
+            letter-spacing: -0.01em;
+        }
+
+        .project-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: #FFFFFF;
+            padding: 8px 16px 8px 8px;
+            border-radius: 24px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+            border-color: #CBD5E1;
+        }
+
+        .project-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex-grow: 1;
+            gap: 4px;
+        }
+
+        .project-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0F172A;
+        }
+
+        .project-label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #64748B;
+            line-height: 1.5;
+            max-width: 280px;
+        }
+
+        .project-icon {
+            width: 24px;
+            height: 24px;
+            margin-top: 8px;
+            color: #6366F1;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-icon {
+            transform: translate(3px, -3px);
+            color: #4F46E5;
+        }
+
+        .hero-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 40px;
+            z-index: 3;
         }
 
         /* ------------------------------------
@@ -191,8 +366,7 @@
         /* Mobile Portrait */
         @media (max-width: 768px) {
             .top-brand {
-                top: 24px;
-                /* Naikkan sedikit agar tidak memakan ruang */
+                margin-top: 24px;
                 font-size: 14px;
             }
 
@@ -206,7 +380,6 @@
             }
 
             .social-links {
-                bottom: 32px;
                 width: 90%;
                 /* Memberikan batas layar */
                 flex-wrap: wrap;
@@ -219,6 +392,48 @@
             .social-links a {
                 font-size: 13px;
                 /* Sedikit dikecilkan untuk mencegah wrap yang berlebihan */
+            }
+
+            .duo-link {
+                margin-bottom: 20px;
+            }
+
+            .duo-widget {
+                padding: 6px 12px;
+            }
+
+            .duo-main {
+                font-size: 13px;
+            }
+
+            .duo-sub {
+                font-size: 8px;
+            }
+
+            .project-link {
+                width: 90%;
+                max-width: 400px;
+            }
+
+            .project-card {
+                padding: 12px;
+                gap: 12px;
+                border-radius: 20px;
+            }
+
+            .project-thumb {
+                width: 60px;
+                height: 60px;
+                border-radius: 12px;
+            }
+
+            .project-name {
+                font-size: 16px;
+            }
+
+            .project-label {
+                font-size: 12px;
+                max-width: 200px;
             }
         }
     </style>
@@ -233,6 +448,17 @@
         <div class="top-brand">Affan Maulana</div>
 
         <div class="content animate-in">
+            <a href="https://invite.duolingo.com/BDHTZTB5CWWKTCTI2D74QMF32E" target="_blank" class="duo-link">
+                <div class="duo-widget">
+                    <div class="duo-icon">
+                        <img src="root/duo-fire.png" alt="Duolingo Streak">
+                    </div>
+                    <div class="duo-content">
+                        <span class="duo-main" id="duo-streak-count">1463</span>
+                        <span class="duo-sub">daily streak Duolingo</span>
+                    </div>
+                </div>
+            </a>
             <h1>
                 Designing Scalable Environments<br>
                 where <span class="highlight text-blue">Urban Design</span> meets<br>
@@ -240,12 +466,32 @@
             </h1>
         </div>
 
-        <div class="social-links animate-in-centered" style="animation-delay: 0.3s;">
-            <a href="mailto:affanmaulanayasin@gmail.com" target="_blank">Email</a>
-            <a href="https://linkedin.com/in/affanmaulana" target="_blank">LinkedIn</a>
-            <a href="https://issuu.com/affanmy/docs/portolio_affan_maulana_2024/" target="_blank">Issuu</a>
-            <a href="https://www.behance.net/affanm#" target="_blank">Behance</a>
-            <a href="https://www.figma.com/@fvnscreen/" target="_blank">Figma</a>
+        <div class="hero-footer animate-in-centered" style="animation-delay: 0.3s;">
+            <a href="/root/jejak-harta" class="project-link">
+                <span class="project-title">On going self project:</span>
+                <div class="project-card">
+                    <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" class="project-thumb">
+                    <div class="project-info">
+
+                        <span class="project-name">Jejak Harta</span>
+                        <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus inflasi
+                            tahunan!</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="project-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                    </svg>
+                </div>
+            </a>
+
+            <div class="social-links">
+                <a href="mailto:affanmaulanayasin@gmail.com" target="_blank">Email</a>
+                <a href="https://linkedin.com/in/affanmaulana" target="_blank">LinkedIn</a>
+                <a href="https://issuu.com/affanmy/docs/portolio_affan_maulana_2024/" target="_blank">Issuu</a>
+                <a href="https://www.behance.net/affanm#" target="_blank">Behance</a>
+                <a href="https://www.figma.com/@fvnscreen/" target="_blank">Figma</a>
+            </div>
         </div>
 
     </section>
@@ -262,6 +508,27 @@
             document.documentElement.style.setProperty('--mouse-x', `${e.touches[0].clientX}px`);
             document.documentElement.style.setProperty('--mouse-y', `${e.touches[0].clientY}px`);
         });
+
+        // 3. Duolingo Streak Counter (Incremental Daily)
+        const updateStreak = () => {
+            const startDate = new Date('2026-04-11'); // Start date for 1463 streak
+            const baseStreak = 1463;
+            const today = new Date();
+
+            // Calculate difference in days
+            const diffTime = today.getTime() - startDate.getTime();
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+            // Current streak is base + days since start
+            const currentStreak = baseStreak + (diffDays > 0 ? diffDays : 0);
+
+            const streakElement = document.getElementById('duo-streak-count');
+            if (streakElement) {
+                streakElement.innerText = currentStreak;
+            }
+        };
+
+        updateStreak();
     </script>
 </body>
 
