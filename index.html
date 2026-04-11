@@ -260,8 +260,6 @@
         }
 
         .project-link {
-            text-decoration: none;
-            color: inherit;
             display: inline-flex;
             flex-direction: column;
             align-items: flex-start;
@@ -278,6 +276,8 @@
         }
 
         .project-card {
+            text-decoration: none;
+            color: inherit;
             display: flex;
             align-items: flex-start;
             gap: 16px;
@@ -472,9 +472,9 @@
         </div>
 
         <div class="hero-footer animate-in-centered" style="animation-delay: 0.3s;">
-            <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-link">
+            <div class="project-link">
                 <span class="project-title">On going self project:</span>
-                <div class="project-card">
+                <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-card">
                     <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" class="project-thumb">
                     <div class="project-info">
 
@@ -487,8 +487,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                     </svg>
-                </div>
-            </a>
+                </a>
+            </div>
 
             <div class="social-links">
                 <a href="mailto:affanmaulanayasin@gmail.com" target="_blank">Email</a>
