@@ -28,7 +28,8 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAFAFA;
             color: #0F172A;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         /* Variabel dinamis untuk melacak kursor */
@@ -259,13 +260,15 @@
             }
         }
 
-        .project-link {
+        .project-section {
             display: inline-flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
+            align-items: center;
+            gap: 16px;
             z-index: 3;
             pointer-events: auto;
+            width: 100%;
+            max-width: 1000px;
         }
 
         .project-title {
@@ -273,6 +276,15 @@
             font-weight: 500;
             color: #1E293B;
             letter-spacing: -0.01em;
+            text-align: center;
+        }
+
+        .projects-container {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .project-card {
@@ -288,8 +300,9 @@
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            width: 100%;
-            max-width: 500px;
+            flex: 1;
+            min-width: 320px;
+            max-width: 480px;
         }
 
         .project-card:hover {
@@ -326,7 +339,6 @@
             font-weight: 400;
             color: #64748B;
             line-height: 1.5;
-            max-width: 280px;
         }
 
         .project-icon {
@@ -365,13 +377,28 @@
 
         /* Mobile Portrait */
         @media (max-width: 768px) {
+            body, html {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 40px 0;
+                justify-content: flex-start;
+            }
+
             .top-brand {
-                margin-top: 24px;
+                margin-top: 0;
+                margin-bottom: 40px;
                 font-size: 14px;
             }
 
             .content {
                 padding: 0 20px;
+                margin-top: 0;
+                margin-bottom: 40px;
             }
 
             h1 {
@@ -381,22 +408,19 @@
 
             .hero-footer {
                 width: 100%;
-                padding: 24px;
+                padding: 0 24px;
+                margin-bottom: 40px;
             }
 
             .social-links {
                 width: 100%;
-                /* Memberikan batas layar */
                 flex-wrap: wrap;
-                /* Izinkan tombol turun ke baris baru jika kepenuhan */
                 justify-content: center;
                 gap: 16px 20px;
-                /* Jarak atas-bawah 16px, kiri-kanan 20px */
             }
 
             .social-links a {
                 font-size: 13px;
-                /* Sedikit dikecilkan untuk mencegah wrap yang berlebihan */
             }
 
             .duo-link {
@@ -415,20 +439,27 @@
                 font-size: 8px;
             }
 
-            .project-link {
-                width: 100%;
-                max-width: none;
+            .project-section {
+                gap: 12px;
+            }
+
+            .projects-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
             }
 
             .project-card {
+                min-width: 0;
+                width: 100%;
                 padding: 8px;
                 gap: 12px;
                 border-radius: 20px;
             }
 
             .project-thumb {
-                width: 80px;
-                height: 80px;
+                width: 64px;
+                height: 64px;
                 border-radius: 12px;
             }
 
@@ -438,12 +469,13 @@
 
             .project-label {
                 font-size: 12px;
-                max-width: 200px;
             }
 
             .project-icon {
                 margin-right: 4px;
                 margin-top: 4px;
+                width: 20px;
+                height: 20px;
             }
         }
     </style>
@@ -477,22 +509,30 @@
         </div>
 
         <div class="hero-footer animate-in-centered" style="animation-delay: 0.3s;">
-            <div class="project-link">
-                <span class="project-title">On going self project:</span>
-                <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-card">
-                    <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" class="project-thumb">
-                    <div class="project-info">
-
-                        <span class="project-name">Jejak Harta</span>
-                        <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus inflasi
-                            tahunan!</span>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="project-icon">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                    </svg>
-                </a>
+            <div class="project-section">
+                <span class="project-title">On going self projects:</span>
+                <div class="projects-container">
+                    <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-card">
+                        <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" class="project-thumb">
+                        <div class="project-info">
+                            <span class="project-name">Jejak Harta</span>
+                            <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus inflasi tahunan!</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="project-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </a>
+                    <a href="https://dividown.vercel.app/" target="_blank" class="project-card">
+                        <img src="root/dividown.png" alt="Dividown Preview" class="project-thumb">
+                        <div class="project-info">
+                            <span class="project-name">Dividown</span>
+                            <span class="project-label">Cek kesehatan saham dividen kamu dan hindari jebakan dividen (Dividend Trap)!</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="project-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             <div class="social-links">
