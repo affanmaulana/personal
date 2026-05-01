@@ -285,6 +285,7 @@
             width: 100%;
             justify-content: center;
             flex-wrap: wrap;
+            transition: all 0.3s ease;
         }
 
         .project-card {
@@ -378,104 +379,126 @@
         /* Mobile Portrait */
         @media (max-width: 768px) {
             body, html {
-                height: auto;
-                min-height: 100vh;
+                height: 100%;
+                overflow: hidden; /* Fix viewport bounce */
             }
 
             .hero {
-                height: auto;
-                min-height: 100vh;
-                padding: 40px 0;
-                justify-content: flex-start;
+                height: 100dvh;
+                padding: 40px 0 24px 0;
+                justify-content: space-between;
+                overflow: hidden;
             }
 
             .top-brand {
                 margin-top: 0;
-                margin-bottom: 40px;
+                margin-bottom: 0;
                 font-size: 14px;
+                flex-shrink: 0;
             }
 
             .content {
-                padding: 0 20px;
-                margin-top: 0;
-                margin-bottom: 40px;
+                padding: 0 24px;
+                margin: auto 0;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
             h1 {
-                font-size: clamp(26px, 7vw, 36px);
-                line-height: 1.35;
+                font-size: clamp(24px, 7vw, 32px);
+                line-height: 1.3;
             }
 
             .hero-footer {
                 width: 100%;
-                padding: 0 24px;
-                margin-bottom: 40px;
+                padding: 0;
+                margin-bottom: 0;
+                gap: 20px;
+                flex-shrink: 0;
             }
 
             .social-links {
                 width: 100%;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
+                overflow-x: auto;
                 justify-content: center;
-                gap: 16px 20px;
+                gap: 20px;
+                padding: 0 24px;
+                scrollbar-width: none;
+            }
+            
+            .social-links::-webkit-scrollbar {
+                display: none;
             }
 
             .social-links a {
-                font-size: 13px;
+                font-size: 12px;
+                flex-shrink: 0;
             }
 
             .duo-link {
-                margin-bottom: 20px;
-            }
-
-            .duo-widget {
-                padding: 6px 12px;
-            }
-
-            .duo-main {
-                font-size: 13px;
-            }
-
-            .duo-sub {
-                font-size: 8px;
+                margin-bottom: 12px;
             }
 
             .project-section {
                 gap: 12px;
+                width: 100%;
+                align-items: flex-start;
+            }
+
+            .project-title {
+                padding: 0 24px;
+                text-align: left;
             }
 
             .projects-container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: 4px 24px 20px 24px;
                 gap: 12px;
+                justify-content: flex-start;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .projects-container::-webkit-scrollbar {
+                display: none;
             }
 
             .project-card {
                 min-width: 0;
-                width: 100%;
+                flex: 0 0 88%;
+                width: 88%;
                 padding: 8px;
                 gap: 12px;
                 border-radius: 20px;
+                scroll-snap-align: center;
+                box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.1);
             }
 
             .project-thumb {
-                width: 64px;
-                height: 64px;
+                width: 60px;
+                height: 60px;
                 border-radius: 12px;
             }
 
             .project-name {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .project-label {
-                font-size: 12px;
+                font-size: 11px;
+                line-height: 1.4;
             }
 
             .project-icon {
-                margin-right: 4px;
+                width: 18px;
+                height: 18px;
                 margin-top: 4px;
-                width: 20px;
-                height: 20px;
             }
         }
     </style>
@@ -553,32 +576,64 @@
             document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
         });
 
-        // Track touch untuk mobile (opsional agar spotlight mengikuti jari saat disentuh)
+        // Track touch untuk mobile
         document.addEventListener('touchmove', (e) => {
             document.documentElement.style.setProperty('--mouse-x', `${e.touches[0].clientX}px`);
             document.documentElement.style.setProperty('--mouse-y', `${e.touches[0].clientY}px`);
         });
 
-        // 3. Duolingo Streak Counter (Incremental Daily)
+        // Duolingo Streak Counter
         const updateStreak = () => {
-            const startDate = new Date('2026-04-11'); // Start date for 1463 streak
+            const startDate = new Date('2026-04-11');
             const baseStreak = 1463;
             const today = new Date();
-
-            // Calculate difference in days
             const diffTime = today.getTime() - startDate.getTime();
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-            // Current streak is base + days since start
             const currentStreak = baseStreak + (diffDays > 0 ? diffDays : 0);
-
             const streakElement = document.getElementById('duo-streak-count');
-            if (streakElement) {
-                streakElement.innerText = currentStreak;
-            }
+            if (streakElement) streakElement.innerText = currentStreak;
+        };
+
+        // Carousel Auto-swipe
+        const initCarousel = () => {
+            const container = document.querySelector('.projects-container');
+            if (!container) return;
+
+            let autoSwipeTimer;
+            let currentIndex = 0;
+            const cards = container.querySelectorAll('.project-card');
+            
+            const startAutoSwipe = () => {
+                if (window.innerWidth > 768) return;
+                autoSwipeTimer = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    const scrollAmount = cards[currentIndex].offsetLeft - container.offsetLeft - 24; // 24 is padding
+                    container.scrollTo({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                }, 4000);
+            };
+
+            const stopAutoSwipe = () => clearInterval(autoSwipeTimer);
+
+            container.addEventListener('touchstart', stopAutoSwipe);
+            container.addEventListener('touchend', () => {
+                stopAutoSwipe();
+                startAutoSwipe();
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                stopAutoSwipe();
+                if (window.innerWidth <= 768) startAutoSwipe();
+            });
+
+            startAutoSwipe();
         };
 
         updateStreak();
+        initCarousel();
     </script>
 </body>
 
