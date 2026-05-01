@@ -378,9 +378,12 @@
 
         /* Mobile Portrait */
         @media (max-width: 768px) {
-            body, html {
+
+            body,
+            html {
                 height: 100%;
-                overflow: hidden; /* Fix viewport bounce */
+                overflow: hidden;
+                /* Fix viewport bounce */
             }
 
             .hero {
@@ -428,7 +431,7 @@
                 padding: 0 24px;
                 scrollbar-width: none;
             }
-            
+
             .social-links::-webkit-scrollbar {
                 display: none;
             }
@@ -539,20 +542,25 @@
                         <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" class="project-thumb">
                         <div class="project-info">
                             <span class="project-name">Jejak Harta</span>
-                            <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus inflasi tahunan!</span>
+                            <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus
+                                inflasi tahunan!</span>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="project-icon">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="project-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                         </svg>
                     </a>
                     <a href="https://dividown.vercel.app/" target="_blank" class="project-card">
                         <img src="root/dividown.png" alt="Dividown Preview" class="project-thumb">
                         <div class="project-info">
                             <span class="project-name">Dividown</span>
-                            <span class="project-label">Cek kesehatan saham dividen kamu dan hindari jebakan dividen (Dividend Trap)!</span>
+                            <span class="project-label">Temukan jebakan tersembunyi di balik dividen tinggi!</span>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="project-icon">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="project-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                         </svg>
                     </a>
                 </div>
@@ -602,7 +610,7 @@
             let autoSwipeTimer;
             let currentIndex = 0;
             const cards = container.querySelectorAll('.project-card');
-            
+
             const startAutoSwipe = () => {
                 if (window.innerWidth > 768) return;
                 autoSwipeTimer = setInterval(() => {
