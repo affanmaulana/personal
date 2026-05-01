@@ -312,12 +312,38 @@
             border-color: #CBD5E1;
         }
 
+        /* Skeleton Animation */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+
         .project-thumb {
             width: 80px;
             height: 80px;
             border-radius: 16px;
-            object-fit: cover;
+            overflow: hidden;
             flex-shrink: 0;
+            background: #F1F5F9;
+        }
+
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-thumb img.loaded {
+            opacity: 1;
         }
 
         .project-info {
@@ -539,7 +565,9 @@
                 <span class="project-title">On going self projects:</span>
                 <div class="projects-container">
                     <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-card">
-                        <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" class="project-thumb">
+                        <div class="project-thumb skeleton">
+                            <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
+                        </div>
                         <div class="project-info">
                             <span class="project-name">Jejak Harta</span>
                             <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus
@@ -552,7 +580,9 @@
                         </svg>
                     </a>
                     <a href="https://dividown.vercel.app/" target="_blank" class="project-card">
-                        <img src="root/dividown.png" alt="Dividown Preview" class="project-thumb">
+                        <div class="project-thumb skeleton">
+                            <img src="root/dividown.png" alt="Dividown Preview" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
+                        </div>
                         <div class="project-info">
                             <span class="project-name">Dividown</span>
                             <span class="project-label">Temukan jebakan tersembunyi di balik dividen tinggi!</span>
