@@ -268,7 +268,7 @@
             z-index: 3;
             pointer-events: auto;
             width: 100%;
-            max-width: 1000px;
+            max-width: 100%;
         }
 
         .project-title {
@@ -283,9 +283,23 @@
             display: flex;
             gap: 16px;
             width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 12px 24px;
             transition: all 0.3s ease;
+        }
+
+        .projects-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (min-width: 1550px) {
+            .projects-container {
+                justify-content: center;
+                padding: 12px 0;
+            }
         }
 
         .project-card {
@@ -302,7 +316,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             flex: 1;
-            min-width: 320px;
+            min-width: 480px;
             max-width: 480px;
         }
 
@@ -499,9 +513,10 @@
             }
 
             .project-card {
-                min-width: 0;
-                flex: 0 0 88%;
-                width: 88%;
+                min-width: 320px;
+                max-width: 320px;
+                width: 320px;
+                flex: 0 0 auto;
                 padding: 8px;
                 gap: 12px;
                 border-radius: 20px;
@@ -593,14 +608,28 @@
                                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                         </svg>
                     </a>
+                    <a href="https://motorku.vercel.app/" target="_blank" class="project-card">
+                        <div class="project-thumb skeleton">
+                            <img src="root/motorku.png" alt="Motorku Preview" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
+                        </div>
+                        <div class="project-info">
+                            <span class="project-name">Motorku</span>
+                            <span class="project-label">Kami kasih tau apa saja yang motormu perlu servis</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="project-icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </a>
                 </div>
             </div>
 
             <div class="social-links">
                 <a href="mailto:affanmaulanayasin@gmail.com" target="_blank">Email</a>
                 <a href="https://linkedin.com/in/affanmaulana" target="_blank">LinkedIn</a>
+                <a href="https://x.com/affanmy_" target="_blank">Twitter</a>
                 <a href="https://issuu.com/affanmy/docs/portolio_affan_maulana_2024/" target="_blank">Issuu</a>
-                <a href="https://www.behance.net/affanm#" target="_blank">Behance</a>
                 <a href="https://www.figma.com/@fvnscreen/" target="_blank">Figma</a>
             </div>
         </div>
