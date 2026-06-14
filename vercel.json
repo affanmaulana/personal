@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/portfolio/:path*",
+      "destination": "https://portfolioarsi2026affan.vercel.app/:path*"
+    }
+  ]
+}
