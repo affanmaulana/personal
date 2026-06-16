@@ -283,23 +283,14 @@
             display: flex;
             gap: 16px;
             width: 100%;
-            justify-content: flex-start;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            scrollbar-width: none;
+            justify-content: center;
+            flex-wrap: wrap;
             padding: 12px 24px;
             transition: all 0.3s ease;
         }
 
         .projects-container::-webkit-scrollbar {
             display: none;
-        }
-
-        @media (min-width: 1550px) {
-            .projects-container {
-                justify-content: center;
-                padding: 12px 0;
-            }
         }
 
         .project-card {
@@ -403,6 +394,7 @@
             gap: 24px;
             margin-bottom: 40px;
             z-index: 3;
+            width: 100%;
         }
 
         /* ------------------------------------
@@ -578,7 +570,7 @@
 
         <div class="hero-footer animate-in-centered" style="animation-delay: 0.3s;">
             <div class="project-section">
-                <span class="project-title">On going self projects:</span>
+                <span class="project-title">Free Tools For You</span>
                 <div class="projects-container">
                     <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-card">
                         <div class="project-thumb skeleton">
@@ -627,10 +619,10 @@
             </div>
 
             <div class="social-links">
-                <a href="mailto:affanmaulanayasin@gmail.com" target="_blank">Email</a>
+                <a href="#" id="email-link">Email</a>
                 <a href="https://linkedin.com/in/affanmaulana" target="_blank">LinkedIn</a>
                 <a href="https://x.com/affanmy_" target="_blank">Twitter</a>
-                <a href="https://issuu.com/affanmy/docs/portolio_affan_maulana_2024/" target="_blank">Issuu</a>
+                <a href="https://www.threads.net/@affanmy_" target="_blank">Threads</a>
                 <a href="https://www.figma.com/@fvnscreen/" target="_blank">Figma</a>
             </div>
         </div>
@@ -700,8 +692,24 @@
             startAutoSwipe();
         };
 
+        // Email Protection (Antispam)
+        const initEmailProtection = () => {
+            const emailLink = document.getElementById('email-link');
+            if (emailLink) {
+                const decrypt = () => {
+                    const user = 'affanmaulanayasin';
+                    const domain = 'gmail.com';
+                    emailLink.setAttribute('href', `mailto:${user}@${domain}`);
+                };
+                emailLink.addEventListener('mouseenter', decrypt);
+                emailLink.addEventListener('touchstart', decrypt);
+                emailLink.addEventListener('click', decrypt);
+            }
+        };
+
         updateStreak();
         initCarousel();
+        initEmailProtection();
     </script>
 </body>
 
