@@ -21,15 +21,10 @@
         body,
         html {
             width: 100%;
-            height: 100vh;
-            /* Fallback */
-            height: 100dvh;
-            /* Mobile browser address bar fix */
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAFAFA;
             color: #0F172A;
-            overflow-x: hidden;
-            overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
         /* Variabel dinamis untuk melacak kursor */
@@ -38,35 +33,82 @@
             --mouse-y: 50%;
         }
 
-        /* 2. Layout Utama */
-        .hero {
+        /* 2. Sticky Header */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+
+        .header-brand {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0F172A;
+            text-decoration: none;
+        }
+
+        .header-social {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-social a {
+            text-decoration: none;
+            color: #64748B;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .header-social a:hover {
+            color: #0F172A;
+        }
+
+        /* 3. Layout Section 1 - Hero */
+        .hero-section {
             position: relative;
             width: 100%;
-            height: 100%;
+            height: calc(100vh - 60px);
+            height: calc(100dvh - 60px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            overflow: hidden;
         }
 
-        /* 3. Lapis Latar Belakang - Base (Redup) */
+        /* Lapis Latar Belakang - Base (Redup) */
         .pattern-bg-base {
             position: absolute;
             inset: 0;
             z-index: 1;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjU1IiB2aWV3Qm94PSItMTAgMCAxNTAgNTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik02NC43ODg0IDBDNzMuODQyIDAuMTY2MDE4IDc4LjU2NTEgNi4yNDQ3OSA3OC42MDA5IDYuMjkxMDJMMTE4LjM4NCA0OS44MjAzQzExOC4zOTIgNDkuODI5IDExOS43MjIgNTEuMzUwNSAxMTYuNTk3IDUyLjc1NTlDMTE0Ljk2OSA1My40ODggMTExLjkyOSA1NC45MTE4IDEwNy40MzEgNTQuNzc2NEM5OS4zMTkzIDU0LjUzMiA5NC4yMDkzIDQ4Ljk0MDQgOTQuMjA5MyA0OC45NDA0TDU0LjE5NzYgNS4xNjExM0M1NC4xOTAxIDUuMTUzNCA1Mi43MTczIDMuNjI3NSA1NS42OTk1IDIuMTA0NDlDNTcuMjQ4MiAxLjMxMzU4IDU5LjkxNjMgMC4wNTg0Mzc2IDY0Ljc4ODQgMFpNMTM0LjYgMTMuNTc2MkMxMzQuNiAxMy41NzYyIDEzNS41NTggMTIuNzE5MyAxMzYuNjI5IDEzLjUwMkMxMzcuMjQzIDEzLjk1MDYgMTM3Ljg5MSAxNS4yMTU2IDEzOC41IDE2Ljk5NjFDMTM5LjA3OCAxOC42ODIzIDEzOS43MzMgMjAuODYyOSAxMzkuNjIgMjMuNTg0QzEzOS4yMjcgMzMuMDg3OSAxMzMuNzMgMzcuNTE1OCAxMzMuNzA0IDM3LjUzNjFMMTIzLjc0NCA0Ni42Mzg3TDExMi4yMiAzNC4wMjkzTDEzNC42IDEzLjU3NjJaIiBmaWxsPSIjREJERUU1Ii8+CjxwYXRoIGQ9Ik03NC44NDQ5IDU0Ljc4NTVDNjUuNzk4NCA1NC42MTk2IDYxLjA3NTUgNDguNTUgNjEuMDMyNCA0OC40OTQ1TDIxLjI0OTIgNC45NjUyMUMyMS4yNDkyIDQuOTY1MjEgMTkuOTAyMyAzLjQzOTA0IDIzLjAzNjQgMi4wMjk2NkMyNC42NjQ0IDEuMjk3NTcgMjcuNzA0OCAtMC4xMjYzMDggMzIuMjAyNCAwLjAwOTE1NTI3QzQwLjMxNCAwLjI1MzU0NyA0NS40MjQgNS44NDUwOSA0NS40MjQgNS44NDUwOUw4NS40MzU4IDQ5LjYyNDRDODUuNDUxNyA0OS42NDEgODYuOTA3MyA1MS4xNjI1IDgzLjkzMzggNTIuNjgxQzgyLjM4NTEgNTMuNDcxOSA3OS43MTcxIDU0LjcyNzEgNzQuODQ0OSA1NC43ODU1Wk01LjAzMzQyIDQxLjIwOTRDNS4wMjk4MiA0MS4yMTI2IDQuMDczMjIgNDIuMDY0OSAzLjAwNDEyIDQxLjI4MzZDMi4zOTAyOCA0MC44MzQ5IDEuNzQyNjUgMzkuNTcgMS4xMzMwMyAzNy43ODk0QzAuNTU1NzA5IDM2LjEwMzIgLTAuMDk5NzMxMiAzMy45MjI3IDAuMDEyOTEzOCAzMS4yMDE1QzAuNDA2MzMgMjEuNzAwNCA1LjkwMDMxIDE3LjI3MjQgNS45Mjg5MyAxNy4yNDk0TDE1Ljg4OTkgOC4xNDY4NUwyNy40MTMzIDIwLjc1NjJMNS4wMzM0MiA0MS4yMDk0WiIgZmlsbD0iI0RCREVFNSIvPgo8L3N2Zz4K');
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjU1IiB2aWV3Qm94PSItMTAgMCAxNTAgNTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik02NC43ODg0IDBDNzMuODQyIDAuMTY2MDE4IDc4LjU2NTEgNi4yNDQ3OSA3OC42MDA5IDYuMjkxMDJMMTE4LjM4NCA0OS44MjAzQzExOC4zOTIgNDkuODI5IDExOS43MjIgNTEuMzUwNSAxMTYuNTk3IDUyLjc1NTlDMTE0Ljk2OSA1My40ODggMTExLjkyOSA1NC45MTE4IDEwNy40MzEgNTQuNzc2NEM5OS4zMTkzIDU0LjUzMiA5NC4yMDkzIDQ4Ljk0MDQgOTQuMjA5MyA0OC45NDA0TDU0LjE5NzYgNS4xNjExM0M5NC4xOTAxIDUuMTUzNCA1Mi43MTczIDMuNjI3NSA1NS42OTk1IDIuMTA0NDlDNTcuMjQ4MiAxLjMxMzU4IDU5LjkxNjMgMC4wNTg0Mzc2IDY0Ljc4ODQgMFpNMTM0LjYgMTMuNTc2MkMxMzQuNiAxMy41NzYyIDEzNS41NTggMTIuNzE5MyAxMzYuNjI5IDEzLjUwMkMxMzcuMjQzIDEzLjk1MDYgMTM3Ljg5MSAxNS4yMTU2IDEzOC41IDE2Ljk5NjFDMTM5LjA3OCAxOC42ODIzIDEzOS43MzMgMjAuODYyOSAxMzkuNjIgMjMuNTg0QzEzOS4yMjcgMzMuMDg3OSAxMzMuNzMgMzcuNTE1OCAxMzMuNzA0IDM3LjUzNjFMMTIzLjc0NCA0Ni42Mzg3TDExMi4yMiAzNC4wMjkzTDEzNC42IDEzLjU3NjJaIiBmaWxsPSIjREJERUU1Ii8+CjxwYXRoIGQ9Ik03NC44NDQ5IDU0Ljc4NTVDNjUuNzk4NCA1NC42MTk2IDYxLjA3NTUgNDguNTUgNjEuMDMyNCA0OC40OTQ1TDIxLjI0OTIgNC45NjUyMUMyMS4yNDkyIDQuOTY1MjEgMTkuOTAyMyAzLjQzOTA0IDIzLjAzNjQgMi4wMjk2NkMyNC42NjQ0IDEuMjk3NTcgMjcuNzA0OCAtMC4xMjYzMDggMzIuMjAyNCAwLjAwOTE1NTI3QzQwLjMxNCAwLjI1MzU0NyA0NS40MjQgNS44NDUwOSA0NS40MjQgNS44NDUwOUw4NS40MzU4IDQ5LjYyNDRDODUuNDUxNyA0OS42NDEgODYuOTA3MyA1MS4xNjI1IDgzLjkzMzggNTIuNjgxQzgyLjM4NTEgNTMuNDcxOSA3OS43MTcxIDU0LjcyNzEgNzQuODQ0OSA1NC43ODU1Wk01LjAzMzQyIDQxLjIwOTRDNS4wMjk4MiA0MS4yMTI2IDQuMDczMjIgNDIuMDY0OSAzLjAwNDEyIDQxLjI4MzZDMi4zOTAyOCA0MC44MzQ5IDEuNzQyNjUgMzkuNTcgMS4xMzMwMyAzNy43ODk0QzAuNTU1NzA5IDM2LjEwMzIgLTAuMDk5NzMxMiAzMy45MjI3IDAuMDEyOTEzOCAzMS4yMDE1QzAuNDA2MzMgMjEuNzAwNCA1LjkwMDMxIDE3LjI3MjQgNS45Mjg5MyAxNy4yNDk0TDE1Ljg4OTkgOC4xNDY4NUwyNy40MTMzIDIwLjc1NjJMNS4wMzM0MiA0MS4yMDk0WiIgZmlsbD0iI0RCREVFNSIvPgo8L3N2Zz4K');
             background-repeat: repeat;
             background-size: 150px 70px;
             opacity: 0.1;
         }
 
-        /* 4. Lapis Latar Belakang - Highlight (Spotlight Kursor) */
+        /* Lapis Latar Belakang - Highlight (Spotlight Kursor) */
         .pattern-bg-highlight {
             position: absolute;
             inset: 0;
             z-index: 2;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjU1IiB2aWV3Qm94PSItMTAgMCAxNTAgNTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik02NC43ODg0IDBDNzMuODQyIDAuMTY2MDE4IDc4LjU2NTEgNi4yNDQ3OSA3OC42MDA5IDYuMjkxMDJMMTE4LjM4NCA0OS44MjAzQzExOC4zOTIgNDkuODI5IDExOS43MjIgNTEuMzUwNSAxMTYuNTk3IDUyLjc1NTlDMTE0Ljk2OSA1My40ODggMTExLjkyOSA1NC45MTE4IDEwNy40MzEgNTQuNzc2NEM5OS4zMTkzIDU0LjUzMiA5NC4yMDkzIDQ4Ljk0MDQgOTQuMjA5MyA0OC45NDA0TDU0LjE5NzYgNS4xNjExM0M1NC4xOTAxIDUuMTUzNCA1Mi43MTczIDMuNjI3NSA1NS42OTk1IDIuMTA0NDlDNTcuMjQ4MiAxLjMxMzU4IDU5LjkxNjMgMC4wNTg0Mzc2IDY0Ljc4ODQgMFpNMTM0LjYgMTMuNTc2MkMxMzQuNiAxMy41NzYyIDEzNS41NTggMTIuNzE5MyAxMzYuNjI5IDEzLjUwMkMxMzcuMjQzIDEzLjk1MDYgMTM3Ljg5MSAxNS4yMTU2IDEzOC41IDE2Ljk5NjFDMTM5LjA3OCAxOC42ODIzIDEzOS43MzMgMjAuODYyOSAxMzkuNjIgMjMuNTg0QzEzOS4yMjcgMzMuMDg3OSAxMzMuNzMgMzcuNTE1OCAxMzMuNzA0IDM3LjUzNjFMMTIzLjc0NCA0Ni42Mzg3TDExMi4yMiAzNC4wMjkzTDEzNC42IDEzLjU3NjJaIiBmaWxsPSIjREJERUU1Ii8+CjxwYXRoIGQ9Ik03NC44NDQ5IDU0Ljc4NTVDNjUuNzk4NCA1NC42MTk2IDYxLjA3NTUgNDguNTUgNjEuMDMyNCA0OC40OTQ1TDIxLjI0OTIgNC45NjUyMUMyMS4yNDkyIDQuOTY1MjEgMTkuOTAyMyAzLjQzOTA0IDIzLjAzNjQgMi4wMjk2NkMyNC42NjQ0IDEuMjk3NTcgMjcuNzA0OCAtMC4xMjYzMDggMzIuMjAyNCAwLjAwOTE1NTI3QzQwLjMxNCAwLjI1MzU0NyA0NS40MjQgNS44NDUwOSA0NS40MjQgNS44NDUwOUw4NS40MzU4IDQ5LjYyNDRDODUuNDUxNyA0OS42NDEgODYuOTA3MyA1MS4xNjI1IDgzLjkzMzggNTIuNjgxQzgyLjM4NTEgNTMuNDcxOSA3OS43MTcxIDU0LjcyNzEgNzQuODQ0OSA1NC43ODU1Wk01LjAzMzQyIDQxLjIwOTRDNS4wMjk4MiA0MS4yMTI2IDQuMDczMjIgNDIuMDY0OSAzLjAwNDEyIDQxLjI4MzZDMi4zOTAyOCA0MC44MzQ5IDEuNzQyNjUgMzkuNTcgMS4xMzMwMyAzNy43ODk0QzAuNTU1NzA5IDM2LjEwMzIgLTAuMDk5NzMxMiAzMy45MjI3IDAuMDEyOTEzOCAzMS4yMDE1QzAuNDA2MzMgMjEuNzAwNCA1LjkwMDMxIDE3LjI3MjQgNS45Mjg5MyAxNy4yNDk0TDE1Ljg4OTkgOC4xNDY4NUwyNy40MTMzIDIwLjc1NjJMNS4wMzM0MiA0MS4yMDk0WiIgZmlsbD0iI0RCREVFNSIvPgo8L3N2Zz4K');
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjU1IiB2aWV3Qm94PSItMTAgMCAxNTAgNTUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik02NC43ODg0IDBDNzMuODQyIDAuMTY2MDE4IDc4LjU2NTEgNi4yNDQ3OSA3OC42MDA5IDYuMjkxMDJMMTE4LjM4NCA0OS44MjAzQzExOC4zOTIgNDkuODI5IDExOS43MjIgNTEuMzUwNSAxMTYuNTk3IDUyLjc1NTlDMTE0Ljk2OSA1My40ODggMTExLjkyOSA1NC45MTE4IDEwNy40MzEgNTQuNzc2NEM5OS4zMTkzIDU0LjUzMiA5NC4yMDkzIDQ4Ljk0MDQgOTQuMjA5MyA0OC45NDA0TDU0LjE5NzYgNS4xNjExM0M5NC4xOTAxIDUuMTUzNCA1Mi43MTczIDMuNjI3NSA1NS42OTk1IDIuMTA0NDlDNTcuMjQ4MiAxLjMxMzU4IDU5LjkxNjMgMC4wNTg0Mzc2IDY0Ljc4ODQgMFpNMTM0LjYgMTMuNTc2MkMxMzQuNiAxMy41NzYyIDEzNS41NTggMTIuNzE5MyAxMzYuNjI5IDEzLjUwMkMxMzcuMjQzIDEzLjk1MDYgMTM3Ljg5MSAxNS4yMTU2IDEzOC41IDE2Ljk5NjFDMTM5LjA3OCAxOC42ODIzIDEzOS43MzMgMjAuODYyOSAxMzkuNjIgMjMuNTg0QzEzOS4yMjcgMzMuMDg3OSAxMzMuNzMgMzcuNTE1OCAxMzMuNzA0IDM3LjUzNjFMMTIzLjc0NCA0Ni42Mzg3TDExMi4yMiAzNC4wMjkzTDEzNC42IDEzLjU3NjJaIiBmaWxsPSIjREJERUU1Ii8+CjxwYXRoIGQ9Ik03NC44NDQ5IDU0Ljc4NTVDNjUuNzk4NCA1NC42MTk2IDYxLjA3NTUgNDguNTUgNjEuMDMyNCA0OC40OTQ1TDIxLjI0OTIgNC45NjUyMUMyMS4yNDkyIDQuOTY1MjEgMTkuOTAyMyAzLjQzOTA0IDIzLjAzNjQgMi4wMjk2NkMyNC42NjQ0IDEuMjk3NTcgMjcuNzA0OCAtMC4xMjYzMDggMzIuMjAyNCAwLjAwOTE1NTI3QzQwLjMxNCAwLjI1MzU0NyA0NS40MjQgNS44NDUwOSA0NS40MjQgNS44NDUwOUw4NS40MzU4IDQ5LjYyNDRDODUuNDUxNyA0OS42NDEgODYuOTA3MyA1MS4xNjI1IDgzLjkzMzggNTIuNjgxQzgyLjM4NTEgNTMuNDcxOSA3OS43MTcxIDU0LjcyNzEgNzQuODQ0OSA1NC43ODU1Wk01LjAzMzQyIDQxLjIwOTRDNS4wMjk4MiA0MS4yMTI2IDQuMDczMjIgNDIuMDY0OSAzLjAwNDEyIDQxLjI4MzZDMi4zOTAyOCA0MC44MzQ5IDEuNzQyNjUgMzkuNTcgMS4xMzMwMyAzNy43ODk0QzAuNTU1NzA5IDM2LjEwMzIgLTAuMDk5NzMxMiAzMy45MjI3IDAuMDEyOTEzOCAzMS4yMDE1QzAuNDA2MzMgMjEuNzAwNCA1LjkwMDMxIDE3LjI3MjQgNS45Mjg5MyAxNy4yNDk0TDE1Ljg4OTkgOC4xNDY4NUwyNy40MTMzIDIwLjc1NjJMNS4wMzM0MiA0MS4yMDk0WiIgZmlsbD0iI0RCREVFNSIvPgo8L3N2Zz4K');
             background-repeat: repeat;
             background-size: 150px 70px;
             opacity: 0.2;
@@ -74,17 +116,6 @@
             -webkit-mask-image: radial-gradient(circle 120px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
             mask-image: radial-gradient(circle 120px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
             pointer-events: none;
-        }
-
-        /* 5. Elemen Tipografi */
-        .top-brand {
-            margin-top: 40px;
-            width: 100%;
-            text-align: center;
-            font-size: 16px;
-            font-weight: 700;
-            z-index: 3;
-            letter-spacing: -0.5px;
         }
 
         .content {
@@ -99,10 +130,10 @@
         }
 
         h1 {
-            font-size: clamp(28px, 5vw, 40px);
+            font-size: clamp(32px, 6vw, 56px);
             font-weight: 500;
-            line-height: 1.3;
-            letter-spacing: -1px;
+            line-height: 1.25;
+            letter-spacing: -1.5px;
             pointer-events: auto;
         }
 
@@ -137,44 +168,62 @@
             }
         }
 
-        /* 6. CTA / Social Links */
-        .social-links {
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 24px;
-            z-index: 3;
-            pointer-events: auto;
-            white-space: nowrap;
-        }
-
-        .social-links a {
-            text-decoration: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
             color: #64748B;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            letter-spacing: 0.5px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 3;
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        .social-links a:hover {
-            color: #0F172A;
+        .arrow-down {
+            width: 20px;
+            height: 20px;
         }
 
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, 8px);
+            }
+        }
+
+        /* 4. Duolingo Widget */
         .duo-link {
             text-decoration: none;
             color: inherit;
             display: inline-block;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
             pointer-events: auto;
         }
 
         .duo-widget {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 10px 12px 10px 10px;
+            padding: 8px 16px 12px 12px;
             border-radius: 100px;
             border: 1px solid #ffffff;
             box-shadow:
@@ -182,6 +231,7 @@
                 0 1px 2px rgba(255, 150, 0, 0.1);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            vertical-align: middle;
         }
 
         .duo-widget:hover {
@@ -223,15 +273,17 @@
         .duo-content {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: left;
+            text-align: left;
             gap: 2px;
-            align-items: flex-start;
         }
 
         .duo-main {
             font-size: 16px;
             font-weight: 700;
             color: #000000;
-            line-height: 1.1;
+            line-height: 1;
             letter-spacing: -0.2px;
         }
 
@@ -240,57 +292,53 @@
             font-weight: 500;
             color: #64748B;
             letter-spacing: 0.08em;
-            margin-top: 1px;
+            margin-top: 2px;
+            line-height: 1;
         }
 
-        /* Animasi khusus untuk elemen di tengah absolut */
-        .animate-in-centered {
-            animation: slideUpFadeCentered 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        }
-
-        @keyframes slideUpFadeCentered {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .project-section {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
+        /* 5. Layout Section 2 - Tools */
+        .tools-section {
+            background-color: #FAFAFA;
+            padding: 100px 24px;
+            width: 100%;
+            position: relative;
             z-index: 3;
-            pointer-events: auto;
-            width: 100%;
-            max-width: 100%;
+            border-top: 1px solid #E2E8F0;
         }
 
-        .project-title {
-            font-size: 14px;
-            font-weight: 500;
-            color: #1E293B;
-            letter-spacing: -0.01em;
-            text-align: center;
-        }
-
-        .projects-container {
+        .tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            gap: 16px;
-            width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 12px 24px;
-            transition: all 0.3s ease;
+            flex-direction: column;
+            gap: 48px;
         }
 
-        .projects-container::-webkit-scrollbar {
-            display: none;
+        .tools-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tools-section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .tools-section-desc {
+            font-size: 16px;
+            color: #64748B;
+            line-height: 1.6;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            width: 100%;
         }
 
         .project-card {
@@ -300,27 +348,30 @@
             align-items: flex-start;
             gap: 16px;
             background: #FFFFFF;
-            padding: 8px 16px 8px 8px;
+            padding: 12px;
             border-radius: 24px;
             border: 1px solid #E2E8F0;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.02);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            flex: 1;
-            min-width: 480px;
-            max-width: 480px;
+            width: 100%;
         }
 
         .project-card:hover {
             transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
             border-color: #CBD5E1;
         }
 
         /* Skeleton Animation */
         @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
         }
 
         .skeleton {
@@ -330,8 +381,8 @@
         }
 
         .project-thumb {
-            width: 80px;
-            height: 80px;
+            width: 88px;
+            height: 88px;
             border-radius: 16px;
             overflow: hidden;
             flex-shrink: 0;
@@ -357,7 +408,8 @@
             align-items: flex-start;
             text-align: left;
             flex-grow: 1;
-            gap: 4px;
+            gap: 6px;
+            padding-top: 4px;
         }
 
         .project-name {
@@ -377,6 +429,7 @@
             width: 24px;
             height: 24px;
             margin-top: 8px;
+            margin-right: 8px;
             color: #6366F1;
             flex-shrink: 0;
             transition: transform 0.3s ease;
@@ -387,14 +440,54 @@
             color: #4F46E5;
         }
 
-        .hero-footer {
+        .more-tools-card {
+            border: 2px dashed #E2E8F0;
+            background: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 24px;
+            border-radius: 24px;
+            text-align: center;
+            color: #64748B;
+            transition: all 0.3s ease;
+            cursor: default;
+            min-height: 112px;
+        }
+
+        .more-tools-card:hover {
+            border-color: #CBD5E1;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .more-tools-info {
             display: flex;
             flex-direction: column;
+            gap: 4px;
             align-items: center;
-            gap: 24px;
-            margin-bottom: 40px;
-            z-index: 3;
+        }
+
+        .more-tools-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .more-tools-desc {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+
+        /* Footer */
+        .footer-simple {
             width: 100%;
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid #E2E8F0;
+            background-color: #FAFAFA;
+            color: #94A3B8;
+            font-size: 13px;
         }
 
         /* ------------------------------------
@@ -404,138 +497,81 @@
         /* Tablet & Mobile Landscape */
         @media (max-width: 1024px) {
             h1 {
-                font-size: clamp(32px, 6vw, 48px);
+                font-size: clamp(28px, 5vw, 44px);
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
             }
         }
 
         /* Mobile Portrait */
         @media (max-width: 768px) {
-
-            body,
-            html {
-                height: 100%;
-                overflow: hidden;
-                /* Fix viewport bounce */
+            .header-container {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 16px;
             }
 
-            .hero {
-                height: 100dvh;
-                padding: 40px 0 88px 0;
-                padding-bottom: calc(80px + env(safe-area-inset-bottom));
-                justify-content: space-between;
-                overflow: hidden;
+            .header-social {
+                width: 100%;
+                overflow-x: auto;
+                justify-content: center;
+                gap: 16px;
+                scrollbar-width: none;
+                padding-bottom: 2px;
             }
 
-            .top-brand {
-                margin-top: 0;
-                margin-bottom: 0;
-                font-size: 14px;
+            .header-social::-webkit-scrollbar {
+                display: none;
+            }
+
+            .header-social a {
+                font-size: 13px;
                 flex-shrink: 0;
             }
 
-            .content {
-                padding: 0 24px;
-                margin: auto 0;
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+            .hero-section {
+                height: calc(100vh - 90px);
+                height: calc(100dvh - 90px);
             }
 
             h1 {
                 font-size: clamp(24px, 7vw, 32px);
-                line-height: 1.3;
+                line-height: 1.35;
             }
 
-            .hero-footer {
-                width: 100%;
-                padding: 0;
-                margin-bottom: 0;
-                gap: 20px;
-                flex-shrink: 0;
+            .tools-section {
+                padding: 60px 16px;
             }
 
-            .social-links {
-                width: 100%;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: center;
-                gap: 20px;
-                padding: 0 24px;
-                scrollbar-width: none;
+            .tools-section-title {
+                font-size: 26px;
             }
 
-            .social-links::-webkit-scrollbar {
-                display: none;
-            }
-
-            .social-links a {
-                font-size: 12px;
-                flex-shrink: 0;
-            }
-
-            .duo-link {
-                margin-bottom: 12px;
-            }
-
-            .project-section {
-                gap: 12px;
-                width: 100%;
-                align-items: flex-start;
-            }
-
-            .project-title {
-                padding: 0 24px;
-                text-align: left;
-            }
-
-            .projects-container {
-                flex-direction: row;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                padding: 4px 24px 20px 24px;
-                gap: 12px;
-                justify-content: flex-start;
-                scrollbar-width: none;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .projects-container::-webkit-scrollbar {
-                display: none;
+            .tools-section-desc {
+                font-size: 14px;
             }
 
             .project-card {
-                min-width: 320px;
-                max-width: 320px;
-                width: 320px;
-                flex: 0 0 auto;
-                padding: 8px;
-                gap: 12px;
+                padding: 10px;
                 border-radius: 20px;
-                scroll-snap-align: center;
-                box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.1);
             }
 
             .project-thumb {
-                width: 60px;
-                height: 60px;
+                width: 70px;
+                height: 70px;
                 border-radius: 12px;
             }
 
             .project-name {
-                font-size: 15px;
+                font-size: 16px;
             }
 
             .project-label {
-                font-size: 11px;
-                line-height: 1.4;
-            }
-
-            .project-icon {
-                width: 18px;
-                height: 18px;
-                margin-top: 4px;
+                font-size: 12px;
             }
         }
     </style>
@@ -546,176 +582,161 @@
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
-<body>
+<header class="sticky-header">
+    <div class="header-container">
+        <a href="#" class="header-brand">Affan Maulana</a>
+        <div class="header-social">
+            <a href="#" id="email-link">Email</a>
+            <a href="https://linkedin.com/in/affanmaulana" target="_blank">LinkedIn</a>
+            <a href="https://x.com/affanmy_" target="_blank">Twitter</a>
+            <a href="https://www.threads.net/@affanmy_" target="_blank">Threads</a>
+            <a href="https://www.figma.com/@fvnscreen/" target="_blank">Figma</a>
+        </div>
+    </div>
+</header>
 
-    <section class="hero" id="hero-section">
-        <div class="pattern-bg-base"></div>
-        <div class="pattern-bg-highlight"></div>
+<section class="hero-section" id="hero-section">
+    <div class="pattern-bg-base"></div>
+    <div class="pattern-bg-highlight"></div>
 
-        <div class="top-brand">Affan Maulana</div>
-
-        <div class="content animate-in">
-            <a href="https://invite.duolingo.com/BDHTZTB5CWWKTCTI2D74QMF32E" target="_blank" class="duo-link">
-                <div class="duo-widget">
-                    <div class="duo-icon">
-                        <img src="root/duo-fire.png" alt="Duolingo Streak">
-                    </div>
-                    <div class="duo-content">
-                        <span class="duo-main" id="duo-streak-count">1463</span>
-                        <span class="duo-sub">daily streak Duolingo</span>
-                    </div>
+    <div class="content animate-in">
+        <a href="https://invite.duolingo.com/BDHTZTB5CWWKTCTI2D74QMF32E" target="_blank" class="duo-link">
+            <div class="duo-widget">
+                <div class="duo-icon">
+                    <img src="root/duo-fire.png" alt="Duolingo Streak">
                 </div>
+                <div class="duo-content">
+                    <span class="duo-main" id="duo-streak-count">1463</span>
+                    <span class="duo-sub">daily streak Duolingo</span>
+                </div>
+            </div>
+        </a>
+        <h1>
+            Designing Scalable Environments<br>
+            where <span class="highlight text-blue">Urban Design</span> meets<br>
+            <span class="highlight text-pink">Digital Systems</span>.
+        </h1>
+    </div>
+
+    <a href="#tools-section" class="scroll-indicator animate-in" style="animation-delay: 0.4s;">
+        <span>Free Tools For You</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+            class="arrow-down">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
+    </a>
+</section>
+
+<section class="tools-section" id="tools-section">
+    <div class="tools-container">
+        <div class="tools-header">
+            <h2 class="tools-section-title">Free Tools For You</h2>
+            <p class="tools-section-desc">Kumpulan tools eksperimental untuk membantu keseharian dan produktivitas Anda
+                secara gratis.</p>
+        </div>
+        <div class="tools-grid">
+            <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-card">
+                <div class="project-thumb skeleton">
+                    <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview"
+                        onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
+                </div>
+                <div class="project-info">
+                    <span class="project-name">Jejak Harta</span>
+                    <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus inflasi
+                        tahunan!</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="project-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
             </a>
-            <h1>
-                Designing Scalable Environments<br>
-                where <span class="highlight text-blue">Urban Design</span> meets<br>
-                <span class="highlight text-pink">Digital Systems</span>.
-            </h1>
-        </div>
 
-        <div class="hero-footer animate-in-centered" style="animation-delay: 0.3s;">
-            <div class="project-section">
-                <span class="project-title">Free Tools For You</span>
-                <div class="projects-container">
-                    <a href="https://jejak-harta.vercel.app/" target="_blank" class="project-card">
-                        <div class="project-thumb skeleton">
-                            <img src="root/jejak-harta.jpg" alt="Jejak Harta Preview" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
-                        </div>
-                        <div class="project-info">
-                            <span class="project-name">Jejak Harta</span>
-                            <span class="project-label">Atur alokasi penyimpanan harta kamu supaya tidak tergerus
-                                inflasi tahunan!</span>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="project-icon">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                    </a>
-                    <a href="https://dividown.vercel.app/" target="_blank" class="project-card">
-                        <div class="project-thumb skeleton">
-                            <img src="root/dividown.png" alt="Dividown Preview" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
-                        </div>
-                        <div class="project-info">
-                            <span class="project-name">Dividown</span>
-                            <span class="project-label">Temukan jebakan tersembunyi di balik dividen tinggi!</span>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="project-icon">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                    </a>
-                    <a href="https://motorku.vercel.app/" target="_blank" class="project-card">
-                        <div class="project-thumb skeleton">
-                            <img src="root/motorku.png" alt="Motorku Preview" onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
-                        </div>
-                        <div class="project-info">
-                            <span class="project-name">Motorku</span>
-                            <span class="project-label">Kami kasih tau apa saja yang motormu perlu servis</span>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="project-icon">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                    </a>
+            <a href="https://dividown.vercel.app/" target="_blank" class="project-card">
+                <div class="project-thumb skeleton">
+                    <img src="root/dividown.png" alt="Dividown Preview"
+                        onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
+                </div>
+                <div class="project-info">
+                    <span class="project-name">Dividown</span>
+                    <span class="project-label">Temukan jebakan tersembunyi di balik dividen tinggi!</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="project-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
+            </a>
+
+            <a href="https://motorku.vercel.app/" target="_blank" class="project-card">
+                <div class="project-thumb skeleton">
+                    <img src="root/motorku.png" alt="Motorku Preview"
+                        onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton')">
+                </div>
+                <div class="project-info">
+                    <span class="project-name">Motorku</span>
+                    <span class="project-label">Kami kasih tau apa saja yang motormu perlu servis berkala.</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="project-icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
+            </a>
+            <!-- Placeholder for future tools -->
+            <div class="more-tools-card">
+                <div class="more-tools-info">
+                    <span class="more-tools-title">More tools are coming soon...</span>
                 </div>
             </div>
-
-            <div class="social-links">
-                <a href="#" id="email-link">Email</a>
-                <a href="https://linkedin.com/in/affanmaulana" target="_blank">LinkedIn</a>
-                <a href="https://x.com/affanmy_" target="_blank">Twitter</a>
-                <a href="https://www.threads.net/@affanmy_" target="_blank">Threads</a>
-                <a href="https://www.figma.com/@fvnscreen/" target="_blank">Figma</a>
-            </div>
         </div>
+    </div>
+</section>
 
-    </section>
+<footer class="footer-simple">
+    <p>&copy; 2026 Affan Maulana. All rights reserved.</p>
+</footer>
 
-    <script>
-        // Track mouse untuk desktop
-        document.addEventListener('mousemove', (e) => {
-            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-        });
+<script>
+    // Track mouse untuk desktop
+    document.addEventListener('mousemove', (e) => {
+        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
 
-        // Track touch untuk mobile
-        document.addEventListener('touchmove', (e) => {
-            document.documentElement.style.setProperty('--mouse-x', `${e.touches[0].clientX}px`);
-            document.documentElement.style.setProperty('--mouse-y', `${e.touches[0].clientY}px`);
-        });
+    // Track touch untuk mobile
+    document.addEventListener('touchmove', (e) => {
+        document.documentElement.style.setProperty('--mouse-x', `${e.touches[0].clientX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${e.touches[0].clientY}px`);
+    });
 
-        // Duolingo Streak Counter
-        const updateStreak = () => {
-            const startDate = new Date('2026-04-11');
-            const baseStreak = 1463;
-            const today = new Date();
-            const diffTime = today.getTime() - startDate.getTime();
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            const currentStreak = baseStreak + (diffDays > 0 ? diffDays : 0);
-            const streakElement = document.getElementById('duo-streak-count');
-            if (streakElement) streakElement.innerText = currentStreak;
-        };
+    // Duolingo Streak Counter
+    const updateStreak = () => {
+        const startDate = new Date('2026-04-11');
+        const baseStreak = 1463;
+        const today = new Date();
+        const diffTime = today.getTime() - startDate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const currentStreak = baseStreak + (diffDays > 0 ? diffDays : 0);
+        const streakElement = document.getElementById('duo-streak-count');
+        if (streakElement) streakElement.innerText = currentStreak;
+    };
 
-        // Carousel Auto-swipe
-        const initCarousel = () => {
-            const container = document.querySelector('.projects-container');
-            if (!container) return;
-
-            let autoSwipeTimer;
-            let currentIndex = 0;
-            const cards = container.querySelectorAll('.project-card');
-
-            const startAutoSwipe = () => {
-                if (window.innerWidth > 768) return;
-                autoSwipeTimer = setInterval(() => {
-                    currentIndex = (currentIndex + 1) % cards.length;
-                    const scrollAmount = cards[currentIndex].offsetLeft - container.offsetLeft - 24; // 24 is padding
-                    container.scrollTo({
-                        left: scrollAmount,
-                        behavior: 'smooth'
-                    });
-                }, 4000);
+    // Email Protection (Antispam)
+    const initEmailProtection = () => {
+        const emailLink = document.getElementById('email-link');
+        if (emailLink) {
+            const decrypt = () => {
+                const user = 'affanmaulanayasin';
+                const domain = 'gmail.com';
+                emailLink.setAttribute('href', `mailto:${user}@${domain}`);
             };
+            emailLink.addEventListener('mouseenter', decrypt);
+            emailLink.addEventListener('touchstart', decrypt);
+            emailLink.addEventListener('click', decrypt);
+        }
+    };
 
-            const stopAutoSwipe = () => clearInterval(autoSwipeTimer);
-
-            container.addEventListener('touchstart', stopAutoSwipe);
-            container.addEventListener('touchend', () => {
-                stopAutoSwipe();
-                startAutoSwipe();
-            });
-
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                stopAutoSwipe();
-                if (window.innerWidth <= 768) startAutoSwipe();
-            });
-
-            startAutoSwipe();
-        };
-
-        // Email Protection (Antispam)
-        const initEmailProtection = () => {
-            const emailLink = document.getElementById('email-link');
-            if (emailLink) {
-                const decrypt = () => {
-                    const user = 'affanmaulanayasin';
-                    const domain = 'gmail.com';
-                    emailLink.setAttribute('href', `mailto:${user}@${domain}`);
-                };
-                emailLink.addEventListener('mouseenter', decrypt);
-                emailLink.addEventListener('touchstart', decrypt);
-                emailLink.addEventListener('click', decrypt);
-            }
-        };
-
-        updateStreak();
-        initCarousel();
-        initEmailProtection();
-    </script>
+    updateStreak();
+    initEmailProtection();
+</script>
 </body>
 
 </html>
